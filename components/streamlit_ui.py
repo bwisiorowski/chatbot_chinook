@@ -1,6 +1,13 @@
+from pathlib import Path
+
 import streamlit as st
 
 END_WORDS = ("koniec", "exit", "quit")
+STYLE = Path(__file__).parent / "style.css"
+
+
+def load_style():
+    st.html(STYLE)
 
 
 def init_chat():
@@ -43,3 +50,14 @@ def get_question():
         st.session_state.ended = True
         st.rerun()
     return question
+
+
+def new_chat_button():
+    with st.container(horizontal_alignment="center"):
+        if st.button("Nowy czat", key="new_chat"):
+            new_chat()
+            st.rerun()
+
+
+def show_footer():
+    st.html('<div class="footer">© Bartosz Wisiorowski</div>')
